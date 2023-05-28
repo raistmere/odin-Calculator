@@ -20,9 +20,12 @@
 .display
 {
     display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
     width: 450px;
     flex: 1;
     margin-top: 25px;
+    font-size: 50px;
     background-color: aquamarine;
 }
 
@@ -43,6 +46,22 @@
     background-color: bisque;
 }
 
+.numPad
+{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.numButton
+{
+    width: 100px;
+    height: 75px;
+    font-size:x-large;
+    font-weight: bold;
+    color: white;
+    background-color: rgb(196, 155, 230);
+}
+
 .rightButtons
 {
     display: flex;
@@ -51,20 +70,55 @@
     background-color: azure;
 }
 
-.clearButton
+.clearPad
 {
+    display: flex;
     flex: 1;
     background-color: cornsilk;
 }
 
+.clearButton
+{
+   flex: 1;
+   height: 75px;
+   font-size: large;
+   font-weight: bold;
+   color: white;
+   background-color: rgb(230, 112, 112);
+}
+
 .opPad
 {
-    flex: 5;
+    display: flex;
+    flex-wrap: wrap;
     background-color: blanchedalmond;
+}
+
+.opButton
+{
+    width: 75px;
+    height: 75px;
+    color: white;
+    font-size: xx-large;
+    background-color: rgb(136, 136, 248);
+}
+
+.opButton.subtract
+{
+    font-size: 50px;
+}
+
+.equalsPad
+{
+    display: flex;
+    background-color: darksalmon;
 }
 
 .equalsButton
 {
-    flex: 2;
-    background-color: darksalmon;
+    flex: 1;
+    height: 75px;
+    color: white;
+    font-size: xx-large;
+    background-color: rgb(94, 209, 171);
 }

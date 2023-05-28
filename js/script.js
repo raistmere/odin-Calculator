@@ -1,13 +1,25 @@
-console.log(add(5, 2));
-console.log(subtract(5, 2));
-console.log(multiply(5, 2));
-console.log(divide(5, 2));
-
-
+//Variables
+let userInput = ""; //This holds all the button presses into a string like a record.
 const numA = 0;
 const numB = 0;
 const operator = "";
 
+//Document references
+const display = document.querySelector(".display");
+const num1 = document.querySelector(".num1");
+const numArray = document.querySelectorAll(".numButton"); //Gets all the numButtons into one array
+
+
+//Adds event listeners to numButtons that will listen for clicks 
+//and execute the press function
+console.log(numArray);
+for (let i = 0; i < numArray.length; i++) 
+{
+    numArray[i].addEventListener("click", function(e)
+    {
+        press(numArray[i]);
+    });
+}
 
 //This function handles what kind of operation we are doing based on: a and B (both numbers)
 //and op - the operator that was chosen.
@@ -33,6 +45,11 @@ function operate(a, b, op)
     }
 }
 
+function updateDisplay()
+{
+    display.textContent = userInput;
+}
+
 
 //This function handles adding numbers together.
 function add(a, b)
@@ -56,4 +73,11 @@ function multiply(a, b)
 function divide(a, b)
 {
     return a / b;
+}
+
+function press(button)
+{
+    userInput += button.textContent;
+    console.log(userInput);
+    updateDisplay();
 }
