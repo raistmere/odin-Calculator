@@ -6,3 +6,65 @@
     text-align: center;
     min-height: 100vh;
 }
+
+.border
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 500px;
+    height: 500px;
+    background-color: aqua;
+}
+
+.display
+{
+    display: flex;
+    width: 450px;
+    flex: 1;
+    margin-top: 25px;
+    background-color: aquamarine;
+}
+
+.buttonPad
+{
+    display: flex;
+    width: 450px;
+    flex: 2;
+    margin-bottom: 25px;
+    background-color: antiquewhite;
+}
+
+.leftButtons
+{
+    display: flex;
+    flex-direction: column;
+    flex: 2;
+    background-color: bisque;
+}
+
+.rightButtons
+{
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    background-color: azure;
+}
+
+.clearButton
+{
+    flex: 1;
+    background-color: cornsilk;
+}
+
+.opPad
+{
+    flex: 5;
+    background-color: blanchedalmond;
+}
+
+.equalsButton
+{
+    flex: 2;
+    background-color: darksalmon;
+}
