@@ -103,16 +103,28 @@ function pressOp(button)
     if(operator)
     {
         console.log("Operator already exists");
-        operandB = userInput; //We assign the current userInput to operandB to complete the first calculation.
 
-        //Calculate first operator
-        //We go ahead and calculate the current operator and assign the display and the operandA to the new number
-        display.textContent = operandA = "" + operate(parseInt(operandA), parseInt(operandB), operator);
+        //Check to see if the user is pressing the operator button back to back.
+        //We check userInput, if it doesn't exist, then that means the user wants to switch operator.
+        if(userInput === "")
+        {
+            operator = button.textContent;
+        }
+        else
+        {
 
-        //After first operator calculation, assign the new chosen operator with the 
-        //calculated number as the new operandA
-        operator = button.textContent; //Assign the new operator
-        userInput = ""; //Clear the user input so they can decide the next operandB
+            operandB = userInput; //We assign the current userInput to operandB to complete the first calculation.
+
+            //Calculate first operator
+            //We go ahead and calculate the current operator and assign the display and the operandA to the new number
+            display.textContent = operandA = "" + operate(parseInt(operandA), parseInt(operandB), operator);
+
+            //After first operator calculation, assign the new chosen operator with the 
+            //calculated number as the new operandA
+            operator = button.textContent; //Assign the new operator
+            userInput = ""; //Clear the user input so they can decide the next operandB
+            operandB = ""; //Clear operandB so we can get the next userInput.
+        }
     }
     else //If operator does not exist already, then we go ahead and assign the operator.
     {
