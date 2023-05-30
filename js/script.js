@@ -1,25 +1,42 @@
 //Variables
-let userInput = ""; //This holds all the button presses into a string like a record.
-const numA = 0;
-const numB = 0;
-const operator = "";
+let userInput = "";
+let operandA = "";
+let operandB = "";
+let operator = "";
 
 //Document references
 const display = document.querySelector(".display");
-const num1 = document.querySelector(".num1");
 const numArray = document.querySelectorAll(".numButton"); //Gets all the numButtons into one array
+const opArray = document.querySelectorAll(".opButton");
+const equalsButton = document.querySelector(".equalsButton");
+const clearButton = document.querySelector(".clearButton");
 
-
-//Adds event listeners to numButtons that will listen for clicks 
-//and execute the press function
-console.log(numArray);
+//Adds event listeners to all buttons that will listen for clicks.
 for (let i = 0; i < numArray.length; i++) 
 {
-    numArray[i].addEventListener("click", function(e)
+    numArray[i].addEventListener("click", function()
     {
-        press(numArray[i]);
+        pressNum(numArray[i]);
     });
 }
+
+for (let i = 0; i < opArray.length; i++) 
+{
+    opArray[i].addEventListener("click", function()
+    {
+        pressOp(opArray[i]);
+    });
+}
+
+equalsButton.addEventListener("click", function()
+{
+    pressEquals(equalsButton);
+});
+
+clearButton.addEventListener("click", function()
+{
+    pressClear(clearButton);
+});
 
 //This function handles what kind of operation we are doing based on: a and B (both numbers)
 //and op - the operator that was chosen.
@@ -33,7 +50,7 @@ function operate(a, b, op)
         case "-":
             return subtract(a, b);
             break;
-        case "*":
+        case "x":
             return multiply(a, b);
             break;
         case "/":
@@ -44,12 +61,6 @@ function operate(a, b, op)
             break;
     }
 }
-
-function updateDisplay()
-{
-    display.textContent = userInput;
-}
-
 
 //This function handles adding numbers together.
 function add(a, b)
@@ -75,9 +86,65 @@ function divide(a, b)
     return a / b;
 }
 
-function press(button)
+//This function handles what happens when a button is pressed.
+//The currentState of the calculator will decide on what happens.
+function pressNum(button)
 {
     userInput += button.textContent;
-    console.log(userInput);
-    updateDisplay();
+    display.textContent = userInput;
 }
+
+//This function handles what happens when the user presses a operator button
+function pressOp(button)
+{
+    //This checks to see if an operator already exists. If so, then we go ahead and 
+    //calculate the current operator and 2 operands, then we go ahead and replace 
+    //operator with the new chosen one. If user keeps doing this, only the operandB will be the new userInput.
+    if(operator)
+    {
+        console.log("Operator already exists");
+        operandB = userInput; //We assign the current userInput to operandB to complete the first calculation.
+
+        //Calculate first operator
+        //We go ahead and calculate the current operator and assign the display and the operandA to the new number
+        display.textContent = operandA = "" + operate(parseInt(operandA), parseInt(operandB), operator);
+
+        //After first operator calculation, assign the new chosen operator with the 
+        //calculated number as the new operandA
+        operator = button.textContent; //Assign the new operator
+        userInput = ""; //Clear the user input so they can decide the next operandB
+    }
+    else //If operator does not exist already, then we go ahead and assign the operator.
+    {
+        console.log("Assigning operator");
+        operator = button.textContent;
+        operandA = display.textContent;
+        userInput = ""; //Reset the userInput to find the next operand.
+    }
+}
+
+//This function handles what happens when we press the equals button.
+function pressEquals(button)
+{
+    console.log("Equals Button Pressed");
+
+    operandB = userInput //We assign the current userInput to operandB to complete the first calculation.
+
+
+    //We go ahead and calculate the current operator and assign the display and the operandA to the new number
+    display.textContent = operandA = "" + operate(parseInt(operandA), parseInt(operandB), operator);
+
+    operator = ""; //We empty the operator variable so we can assign a new one.
+    operandB = ""; //We empty operandB so the user can select the next number to calculate with operandA.
+    userInput = ""; //We empty userInput to prepare for the next operand the user wants.
+}
+
+//This function handles what happens when we press the clear button.
+function pressClear(button)
+{
+    console.log("Clear Button Pressed");
+    //Set all variables to empty string to clear the calculator.
+    userInput = operandA = operandB = operator = "";
+    display.textContent = "0";
+}
+
