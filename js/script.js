@@ -115,9 +115,25 @@ function pressOp(button)
 
             operandB = userInput; //We assign the current userInput to operandB to complete the first calculation.
 
-            //Calculate first operator
+            //Check to see if the operandB is 0 and if the user is dividing.
+            if(operandB === "0" && operator === "/")
+            {
+                display.textContent = "Can't Divide By Zero";
+                return null;
+            }
+
+            //Calculate first operator & keep decimal places to 2 max.
             //We go ahead and calculate the current operator and assign the display and the operandA to the new number
-            display.textContent = operandA = "" + operate(parseInt(operandA), parseInt(operandB), operator);
+            let num = operate(parseInt(operandA), parseInt(operandB), operator);
+            if(Number.isInteger(num))
+            {
+                display.textContent = operandA = " " + num;
+            }
+            else
+            {
+                display.textContent = operandA = "" + parseFloat(num).toFixed(2);
+            }
+            
 
             //After first operator calculation, assign the new chosen operator with the 
             //calculated number as the new operandA
@@ -138,13 +154,24 @@ function pressOp(button)
 //This function handles what happens when we press the equals button.
 function pressEquals(button)
 {
+    //If there is no operator chosen yet, then the equals button does not do anything.
+    if(operator === "") { return null;}
+
     console.log("Equals Button Pressed");
 
     operandB = userInput //We assign the current userInput to operandB to complete the first calculation.
 
 
     //We go ahead and calculate the current operator and assign the display and the operandA to the new number
-    display.textContent = operandA = "" + operate(parseInt(operandA), parseInt(operandB), operator);
+    let num = operate(parseInt(operandA), parseInt(operandB), operator);
+    if(Number.isInteger(num))
+    {
+        display.textContent = operandA = " " + num;
+    }
+    else
+    {
+        display.textContent = operandA = "" + parseFloat(num).toFixed(2);
+    }
 
     operator = ""; //We empty the operator variable so we can assign a new one.
     operandB = ""; //We empty operandB so the user can select the next number to calculate with operandA.
